@@ -1,0 +1,46 @@
+﻿@*Define model*@
+@model IEnumerable<Student>
+
+@*Define ViewData*@
+@{
+    ViewData["Title"] = "Add Student to Course";
+}
+
+@*Write code*@
+<div class="row">
+    <div class="col-md-8 offset-md-2">
+        <table class="table">
+            <thead>
+                <tr class="text-center">
+                    <th>@Html.DisplayNameFor(model =>model.FullName)</th>
+                    <th>@Html.DisplayNameFor(model =>model.Description)</th>
+                    <th>@Html.DisplayNameFor(model =>model.CreationDate)</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td class="align-middle">
+                            @Html.DisplayFor(modelItem => item.FullName)
+                        </td>
+                        <td class="align-middle">
+                            @Html.DisplayFor(modelItem => item.Description)
+                        </td>
+                        <td class="align-middle">
+                            @Html.DisplayFor(modelItem => item.CreationDate, "{0:dd/MM/yyyy")
+                        </td>
+                        <td class="align-middle">
+                            <a class="btn btn-outline-primary" asp-action="AddStudentToCourse" asp-route-id="@item.Id" asp-route-courseId=@ViewData["CourseId"]><i class="bi bi-person-check-fill"></i>Add to Course </a>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<div style="align-content: center;" class="text-white">
+    <a asp-controller="Courses" asp-action="Students" asp-route-id=@ViewData["CourseId"] class="btn btn-outline-secondary">Back</a>
+</div>

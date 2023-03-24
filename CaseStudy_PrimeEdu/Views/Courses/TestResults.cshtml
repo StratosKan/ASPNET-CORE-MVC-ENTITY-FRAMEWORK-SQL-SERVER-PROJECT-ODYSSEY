@@ -1,0 +1,36 @@
+﻿@model Test
+
+@{
+    ViewData["Title"] = "Grades";
+}
+
+<div class="row text">
+    <div class="col-md-8 offset-2">
+        <p>
+            <h1>Grades for @Model.Name</h1>
+        </p>
+        <div class="row">
+            <div class="col-md-8 offset-2">
+                <div class="form-group">
+                    <label asp-for="Name" class="control-label"></label>
+                    <input asp-for="Name" class="form-control" readonly />
+                    <span asp-validation-for="Name" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Grade" class="control-label"></label>
+                    <input asp-for="Grade" class="form-control" readonly />
+                    <span asp-validation-for="Grade" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="CreationDate" class="control-label"></label>
+                    <input asp-for="CreationDate" class="form-control" readonly />
+                    <span asp-validation-for="CreationDate" class="text-danger"></span>
+                </div>                
+            </div>
+        </div>
+    </div>
+</div>
+
+<div style="align-content: center;" class="text-white">
+    <a asp-controller="Courses" asp-action="Tests" asp-route-id=@ViewData["CourseId"] class="btn btn-outline-secondary">Back</a>
+</div>
