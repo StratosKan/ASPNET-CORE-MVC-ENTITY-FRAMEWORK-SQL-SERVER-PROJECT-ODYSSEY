@@ -15,6 +15,19 @@ namespace CaseStudy_PrimeEdu.Controllers
 
         public IActionResult Index()
         {
+            // set a cookie
+            HttpContext.Response.Cookies.Append("cookieName", "cookieValue", new CookieOptions
+            {
+                Expires = DateTimeOffset.UtcNow.AddHours(1),
+                HttpOnly = true,
+                Secure = true,
+                SameSite = SameSiteMode.Strict
+            });
+
+            // read a cookie
+            var cookieValue = HttpContext.Request.Cookies["cookieName"];
+
+
             return View();
         }
 

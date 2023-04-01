@@ -1,5 +1,6 @@
 using CaseStudy_PrimeEdu.Data;
 using CaseStudy_PrimeEdu.Data.Services;
+using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -11,6 +12,15 @@ builder.Services.AddScoped<IStudentsService, StudentsService>();
 builder.Services.AddScoped<ITeachersService, TeachersService>();
 builder.Services.AddScoped<ICoursesService, CoursesService>();
 builder.Services.AddScoped<ITestsService, TestsService>();
+
+builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
+    .AddCookie(options => {
+        options.LoginPath = "/Account/Login"; //TODO
+        options.LogoutPath = "/Account/Logout"; //TODO
+        options.Cookie.Name = "CaseStudy_PrimeEdu"; //TODO
+        options.ExpireTimeSpan = TimeSpan.FromMinutes(60);
+    });
+
 
 builder.Services.AddControllersWithViews();
 
@@ -28,6 +38,8 @@ app.UseHttpsRedirection();
 app.UseStaticFiles();
 
 app.UseRouting();
+
+app.UseAuthentication();
 
 app.UseAuthorization();
 
