@@ -13,24 +13,27 @@ namespace CaseStudy_PrimeEdu.Data
                 context.Database.EnsureCreated();
 
                 //User
-                if (!context.Users.Any())
+                if (!context.ApplicationUsers.Any())
                 {
-                    context.Users.AddRange(new List<User>()
+                    context.ApplicationUsers.AddRange(new List<ApplicationUser>()
                     {
-                        new User()
+                        new ApplicationUser()
                         {
                            UserName = "admin",
-                           Password = "123"
+                           InstallationId = 1
+                           //Password = "123"
                         },
-                        new User()
+                        new ApplicationUser()
                         {
                             UserName = "student",
-                            Password = "123"
+                            InstallationId = 1
+                            //Password = "123"
                         },
-                        new User()
+                        new ApplicationUser()
                         {
                             UserName = "teacher",
-                            Password = "123"
+                            InstallationId = 1
+                            //Password = "123"
                         }
                     });
 

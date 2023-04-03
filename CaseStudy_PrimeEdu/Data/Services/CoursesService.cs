@@ -157,6 +157,7 @@ namespace CaseStudy_PrimeEdu.Data.Services
             if (atLeastOne == null){ return;}
 
             var result = await _context.Courses.FirstOrDefaultAsync(n => n.Id == id);
+
             _context.Courses.Remove(result);
 
             await DeleteJoinsAsync(id);

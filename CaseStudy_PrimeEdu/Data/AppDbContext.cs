@@ -1,9 +1,10 @@
 ﻿using CaseStudy_PrimeEdu.Models;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 
 namespace CaseStudy_PrimeEdu.Data
 {
-    public class AppDbContext: DbContext
+    public class AppDbContext: IdentityDbContext<ApplicationUser>
     {
         public AppDbContext(DbContextOptions<AppDbContext> options): base(options)
         {
@@ -47,6 +48,6 @@ namespace CaseStudy_PrimeEdu.Data
         public DbSet<Teacher> Teachers { get; set; }
         public DbSet<Test> Tests { get; set; }
 
-        public DbSet<User> Users { get; set; }
+        public DbSet<ApplicationUser> ApplicationUsers { get; set; }
     }
 }
