@@ -15,6 +15,8 @@ namespace CaseStudy_PrimeEdu.Models
         public string? Description { get; set; } // BIO/DETAILS
 
         [Display(Name = "Member Since")]
+        [DataType(DataType.Date)]
+        [DisplayFormat(DataFormatString = "{0:dd-MM-yyyy}", ApplyFormatInEditMode = true)]
         public DateTime CreationDate { get; set; }
         public DateTime LastModifiedDate { get; set; }
 
