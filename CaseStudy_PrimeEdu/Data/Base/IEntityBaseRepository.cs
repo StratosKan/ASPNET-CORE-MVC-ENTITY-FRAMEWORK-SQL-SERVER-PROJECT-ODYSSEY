@@ -8,6 +8,7 @@ namespace CaseStudy_PrimeEdu.Data.Base
         Task<T> GetByIdAsync(int id);
         Task AddAsync(T entity);
         Task UpdateAsync(int id, T entity);
+        Task UpdatePartialAsync(int id, T entity, List<string> propertiesToUpdate);
         Task DeleteAsync(int id);
     }
 }

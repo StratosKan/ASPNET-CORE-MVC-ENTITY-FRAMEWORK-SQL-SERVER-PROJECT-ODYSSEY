@@ -11,7 +11,7 @@ namespace CaseStudy_PrimeEdu.Data.Base
         {
             _context = context;
         }
-        public async Task AddAsync(T entity)
+        public virtual async Task AddAsync(T entity)
         {
             await _context.Set<T>().AddAsync(entity);
             await _context.SaveChangesAsync();
@@ -22,13 +22,11 @@ namespace CaseStudy_PrimeEdu.Data.Base
             var entity = await _context.Set<T>().FirstOrDefaultAsync(n => n.Id == id);
             EntityEntry entityEntry = _context.Entry<T>(entity);
             entityEntry.State = EntityState.Deleted;
+
+            await _context.SaveChangesAsync();
         }
 
-        public async Task<IEnumerable<T>> GetAllAsync()
-        {
-            var result = await _context.Set<T>().ToListAsync();
-            return result;
-        }
+        public async Task<IEnumerable<T>> GetAllAsync() => await _context.Set<T>().ToListAsync();
 
         public async Task<T> GetByIdAsync(int id)
         {
@@ -36,11 +34,23 @@ namespace CaseStudy_PrimeEdu.Data.Base
             return result;
         }
 
-        public async Task UpdateAsync(int id, T entity)
+        public virtual async Task UpdatePartialAsync(int id, T entity, List<string> propertiesToUpdate)
+        {
+            EntityEntry entityEntry = _context.Entry<T>(entity);
+
+            foreach (var propertyName in propertiesToUpdate)
+            {
+                entityEntry.Property(propertyName).IsModified = true;
+            }
+
+            await _context.SaveChangesAsync();
+        }
+
+        public virtual async Task UpdateAsync(int id, T entity)
         {
             EntityEntry entityEntry = _context.Entry<T>(entity);
             entityEntry.State = EntityState.Modified;
-            //return entity;
+            await _context.SaveChangesAsync();
         }
     }
 }

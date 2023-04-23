@@ -1,12 +1,13 @@
-﻿using System;
+﻿using CaseStudy_PrimeEdu.Data.Base;
+using System;
 using System.ComponentModel.DataAnnotations;
 
 namespace CaseStudy_PrimeEdu.Models
 {
-    public class Student
+    public class Student: IEntityBase
     {
         [Key]
-        public int Id { get; set; }
+        public int Id { get; set; } //overrides
         [Required]
         public int InstallationId { get; set; }
         [Display(Name = "Full Name")]
